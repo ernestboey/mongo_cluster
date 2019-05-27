@@ -29,3 +29,10 @@ services:
       - ./scripts:/scripts
     restart: always
     entrypoint: [ "bash", "/scripts/mongosetup.sh" ]
+
+  web:
+    build: ./src
+    ports:
+      - "80:3000"
+    links:
+      - mongo1
