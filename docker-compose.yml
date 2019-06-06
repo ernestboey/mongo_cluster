@@ -6,26 +6,40 @@ services:
     image: mongo:3.2-jessie
     restart: always
     ports:
-            - 9017:27017
-    entrypoint: [ "/usr/bin/mongod", "--replSet", "rs", "--rest", "--httpinterface" ]
+      - 9017:27017
+    entrypoint:
+      ["/usr/bin/mongod", "--replSet", "rs", "--rest", "--httpinterface"]
+    volumes:
+      - data-volume-mongo3:/data/db
 
   mongo2:
     image: mongo:3.2-jessie
     restart: always
     ports:
-            - 8017:27017
-    entrypoint: [ "/usr/bin/mongod", "--replSet", "rs", "--rest", "--httpinterface" ]
+      - 8017:27017
+    entrypoint:
+      ["/usr/bin/mongod", "--replSet", "rs", "--rest", "--httpinterface"]
+    volumes:
+      - data-volume-mongo2:/data/db
 
   mongo1:
     image: mongo:3.2-jessie
     restart: always
     ports:
-            - 7017:27017
-    entrypoint: [ "/usr/bin/mongod", "--replSet", "rs", "--rest", "--httpinterface" ]
+      - 7017:27017
+    entrypoint:
+      ["/usr/bin/mongod", "--replSet", "rs", "--rest", "--httpinterface"]
+    volumes:
+      - data-volume-mongo1:/data/db
 
   mongosetup:
     image: mongo:3.2-jessie
     volumes:
       - ./scripts:/scripts
     restart: always
-    entrypoint: [ "bash", "/scripts/mongosetup.sh" ]
+    entrypoint: ["bash", "/scripts/mongosetup.sh"]
+
+volumes:
+  data-volume-mongo1:
+  data-volume-mongo2:
+  data-volume-mongo3:
