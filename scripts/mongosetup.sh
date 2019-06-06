@@ -39,22 +39,4 @@ mongo --host mongo1:27017 <<EOF
     db.getMongo().setReadPref('nearest');
 EOF
 
-# echo "Sleep Delay 30sec"
-# sleep 30
-# echo "Done sleep"
-
-# mongo --host mongo1:27017 <<EOF
-#     db.getMongo().setSlaveOk();
-# EOF
-
-# mongo --host mongo1:27017 <<EOF
-#     db.createUser(
-#         {
-#             user: "testroot",
-#             pwd: "testpassword",
-#             roles: [{ role: "userAdminAnyDatabase", db: "admin" }]
-#         }
-#     );
-# EOF
-
 tail -f /dev/null
